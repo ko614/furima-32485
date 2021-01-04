@@ -6,12 +6,12 @@
 | ----------------| ------ | ----------- |
 | nickname        | string | null: false |
 | email           | string | null: false |
-| password        | string | null: false |
+| encrypted_password       | string | null: false |
 | family_name     | string | null: false |
 | first_name      | string | null: false |
 | family_name_kana| string | null: false |
 | first_name_kana | string | null: false |
-| birth_day       | string | null: false |
+| birth_day       | date   | null: false |
 
 
 ### Association
@@ -24,14 +24,13 @@
 
 | Column          | Type   | Options     |
 | ----------------| ------ | ----------- |
-| image           | string | null: false |
 | name            | string | null: false |
 | description     | string | null: false |
-| category        | string | null: false |
-| status          | string | null: false |
-| delivery_fee    | string | null: false |
-| ship_form       | string | null: false |
-| shipping_days   | string | null: false |
+| category_id        | integer | null: false |
+| status_id          | integer | null: false |
+| delivery_fee_id    | integer | null: false |
+| ship_form_id       | integer | null: false |
+| shipping_days_id   | integer | null: false |
 | user_id         | references | null: false, foreign_key: true  |
 | price           | string | null: false |
 
@@ -51,7 +50,6 @@
 | prefecture   | string | null: false                        |
 | city         | string | null: false                        |
 | address      | string | null: false                        |
-| building_name| string | null: false                        |
 | phone_number | string | null: false                        |
 ### Association
 
@@ -69,4 +67,4 @@
 
 - belongs_to :users
 - belongs_to :items
-- has_one    :items
+
