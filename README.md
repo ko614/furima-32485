@@ -33,11 +33,12 @@
 | shipping_days_id   | integer | null: false |
 | user         | references | null: false, foreign_key: true  |
 | price           | integer | null: false |
+| prefecture_id   | integer |null:false                      | 
 
 ### Association
 
 - belongs_to :user
-- has_one :buys
+- has_one :buy
 
 
 
@@ -50,7 +51,7 @@
 | prefecture_id   | integer |null:false                      | 
 | city         | string | null: false                        |
 | address      | string | null: false                        |
-| building_name      | string | null: false                        |
+| building_name      | string |                         |
 | phone_number | string | null: false                        |
 ### Association
 
