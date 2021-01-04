@@ -25,19 +25,19 @@
 | Column          | Type   | Options     |
 | ----------------| ------ | ----------- |
 | name            | string | null: false |
-| description     | string | null: false |
+| description     | text | null: false |
 | category_id        | integer | null: false |
 | status_id          | integer | null: false |
 | delivery_fee_id    | integer | null: false |
 | ship_form_id       | integer | null: false |
 | shipping_days_id   | integer | null: false |
-| user_id         | references | null: false, foreign_key: true  |
-| price           | string | null: false |
+| user         | references | null: false, foreign_key: true  |
+| price           | integer | null: false |
 
 ### Association
 
-- belongs_to :users
-- has_one :buy
+- belongs_to :user
+- has_one :buys
 
 
 
@@ -45,11 +45,12 @@
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
-| buy_id       | references | null: false, foreign_key: true |
+| buy       | references | null: false, foreign_key: true |
 | post_code    | string | null: false                        |
-| prefecture   | string | null: false                        |
+| prefecture_id   | integer |null:false                      | 
 | city         | string | null: false                        |
 | address      | string | null: false                        |
+| building_name      | string | null: false                        |
 | phone_number | string | null: false                        |
 ### Association
 
@@ -60,11 +61,13 @@
 
 | Column     | Type       | Options                        |
 | -------    | ---------- | ------------------------------ |
-| user_id    | references | null: false, foreign_key: true |
-| items_id   | references | null: false, foreign_key: true |
+| user    | references | null: false, foreign_key: true |
+| items   | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
+- belongs_to :user
+- belongs_to :item
+- has_one :destination
+
 
