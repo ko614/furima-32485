@@ -1,11 +1,16 @@
 class User < ApplicationRecord
-  
-  validates :nickname, presence: true
-  validates :family_name , presence: true
-  validates :first_name, presence: true
-  validates :family_name_kana, presence: true
-  validates :first_name_kana, presence: true
+  with_options presence: true do
+  validates :nickname
+  validates :family_name , format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/, message: '全角文字を使用してください' }
+  validates :first_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/, message: '全角文字を使用してください' }
+  validates :family_name_kana,  format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい。'}
+  validates :first_name_kana,  format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい。'}
   validates :birth_day, presence: true
+  end
+
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+  validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください' 
+  
   has_many :items
   has_many :buys
 
