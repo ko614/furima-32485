@@ -14,11 +14,7 @@ describe User do
         @user.password_confirmation = "00000a"
         expect(@user).to be_valid
       end
-      it "passwordが6文字以上の英数混合であれば登録できる" do
-        @user.password = "00000a"
-        @user.password_confirmation = "00000a"
-        expect(@user).to be_valid
-      end
+      
     end
 
     context '新規登録がうまくいかないとき' do
@@ -48,6 +44,11 @@ describe User do
         @user.password=""
         @user.valid?
         expect(@user.errors.full_messages).to include("Password can't be blank")
+      end
+      it "passwordは全角だと登録できない" do
+        @user.password="ああああああ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
       end
       it "passwordが5文字以下であれば登録できない" do
         @user.password = "00000"
@@ -114,7 +115,7 @@ describe User do
         expect(@user.errors.full_messages).to include("First name kana can't be blank")
       end
       it "first_name_kanaはひらがなだと登録できない" do
-        @user.first_name_kana = ''
+        @user.first_name_kana = 'おおさわ'
         @user.valid?
         expect(@user.errors.full_messages).to include("First name kana はカタカナで入力して下さい。")
       end
