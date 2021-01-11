@@ -57,7 +57,7 @@ describe Item do
       it "delivery_fee_idが空だと出品できない" do
         @item.delivery_fee_id= ""
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery can't be blank")
+        expect(@item.errors.full_messages).to include("Delivery fee can't be blank")
       end
       it "ship_form_idが”--”だと出品できない" do
         @item.ship_form_id= 0
@@ -67,7 +67,7 @@ describe Item do
       it "ship_form_idが空だと出品できない" do
         @item.ship_form_id= ""
         @item.valid?
-        expect(@item.errors.full_messages).to include("Ship can't be blank")
+        expect(@item.errors.full_messages).to include("Ship form can't be blank")
       end
       it "shipping_day_idが”--”だと出品できない" do
         @item.shipping_day_id= 1
@@ -77,7 +77,7 @@ describe Item do
       it "shipping_day_idが空だと出品できない" do
         @item.shipping_day_id= ""
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping can't be blank")
+        expect(@item.errors.full_messages).to include("Shipping day can't be blank")
       end
       it "priceが空だと出品できない" do
         @item.price= nil
@@ -89,10 +89,25 @@ describe Item do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price は半角数字で入力して下さい。")
       end
+      it "半角英語だと出品できない" do
+        @item.price= "aaaa"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price は半角数字で入力して下さい。")
+      end
+      it "半角英数字だと出品できない" do
+        @item.price= "100aaa"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price は半角数字で入力して下さい。")
+      end
       it "10,000,000以上だと出品できない" do
         @item.price= 10000000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price は半角数字で入力して下さい。")
+        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+      end
+      it "299円以下だと出品できない" do
+        @item.price= 299
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
       end
   end
  end
