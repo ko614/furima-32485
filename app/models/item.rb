@@ -12,7 +12,7 @@ class Item < ApplicationRecord
     validates :delivery_fee_id
     validates :shipping_day_id
     validates :ship_form_id
-    validates :price
+    validates :price,numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
 
     
 
