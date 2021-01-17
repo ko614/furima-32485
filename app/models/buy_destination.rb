@@ -1,6 +1,6 @@
 class BuyDestination
   include ActiveModel::Model
-  attr_accessor  :post_code, :prefecture_id, :city, :address, :phone_number,:building_name, :user_id, :item_id
+  attr_accessor  :post_code, :prefecture_id, :city, :address, :phone_number, :building_name, :user_id, :item_id, :token
 
 
   with_options presence: true do
@@ -8,6 +8,7 @@ class BuyDestination
     validates :city
     validates :address
     validates :phone_number, format: { with: /\A\d{11}\z/, message: "電話番号は数字のみの１１桁以内で入力してください" }
+    validates :token
 
   end
 
