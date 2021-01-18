@@ -19,11 +19,15 @@ describe BuyDestination do
         @buy_destination.valid?
         expect(@buy_destination.errors.full_messages).to include("Token can't be blank")
       end
-
       it "post_codeが空だと購入できない" do
         @buy_destination.post_code = ''
         @buy_destination.valid?
         expect(@buy_destination.errors.full_messages).to include("Post code can't be blank")
+      end
+      it "post_codeにーがないと購入できない" do
+        @buy_destination.post_code = '2430427'
+        @buy_destination.valid?
+        expect(@buy_destination.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
       end
       it "prefecture_idが”--”だと購入できない" do
         @buy_destination.prefecture_id = 0
