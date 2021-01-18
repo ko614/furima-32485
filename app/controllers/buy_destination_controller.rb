@@ -40,19 +40,11 @@ class BuyDestinationController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:item_id])
-  end
-  
-  def pay_item
-  Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-
-
-  def set_item
     @item = Item.find(params[:id])
   end
   
   def pay_item
-  Payjp.api_key = "PAYJP_SECRET_KEY"  
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
 
       Payjp::Charge.create(
         amount: @item.price,  
