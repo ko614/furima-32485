@@ -6,6 +6,9 @@ FactoryBot.define do
     city { '海老名市' }
     address { '杉久保南3-14-26' }
     phone_number { '08012663378' }
+    user_id  { 1 }
+    item_id  { 1 }
+
     
   end
 end

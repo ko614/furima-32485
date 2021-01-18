@@ -8,6 +8,8 @@ class BuyDestination
     validates :city
     validates :address
     validates :phone_number, format: { with: /\A\d{11}\z/, message: "電話番号は数字のみの１１桁以内で入力してください" }
+    validates :user_id
+    validates :item_id
     validates :token
 
   end

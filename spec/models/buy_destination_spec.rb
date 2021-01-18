@@ -59,6 +59,16 @@ describe BuyDestination do
         @buy_destination.valid?
         expect(@buy_destination.errors.full_messages).to include("Phone number 電話番号は数字のみの１１桁以内で入力してください")
       end
+      it "user_idが無いと購入できない" do
+        @buy_destination.user_id = nil
+        @buy_destination.valid?
+        expect(@buy_destination.errors.full_messages).to include("User can't be blank")
+      end
+      it "item_idが無いと購入できない" do
+        @buy_destination.item_id = nil
+        @buy_destination.valid?
+        expect(@buy_destination.errors.full_messages).to include("Item can't be blank")
+      end
 
     
       
