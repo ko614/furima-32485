@@ -1,7 +1,6 @@
 class BuyDestinationController < ApplicationController
   before_action :authenticate_user!, only: [:index]
-  before_action :set_item,only: [:index,:create,]
-
+  before_action :set_item,only: [:index,:create]
 
 
   def index
@@ -23,7 +22,7 @@ class BuyDestinationController < ApplicationController
   end
  
   def create
-    @buy_destination = BuyDestination.new(destination_params)   
+    @buy_destination = BuyDestination.new(destination_params) 
      if @buy_destination.valid?
       pay_item
       
@@ -45,12 +44,13 @@ class BuyDestinationController < ApplicationController
   end
   
   def pay_item
-  Payjp.api_key = "PAYJP_SECRET_KEY"  
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+
       Payjp::Charge.create(
         amount: @item.price,  
         card: destination_params[:token],    
         currency: 'jpy'               
       )
-    end
+  end
 
 end
