@@ -6,7 +6,11 @@ describe BuyDestination do
 
   describe '商品購入' do
     context '商品購入がうまくいくとき' do
-      it "token、post_code、prefecture_id、cityとaddress、phone_numberが存在すれば登録できる" do
+      it "token、post_code、prefecture_id、cityとaddress、phone_number、building_nameが存在すれば登録できる" do
+        expect(@buy_destination).to be_valid
+      end
+      it "building_nameが空でも登録できる" do
+        @buy_destination.building_name = ''
         expect(@buy_destination).to be_valid
       end
       

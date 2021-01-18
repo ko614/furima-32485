@@ -51,6 +51,6 @@ class BuyDestinationController < ApplicationController
         card: destination_params[:token],    
         currency: 'jpy'               
       )
-    end
+  end
 
 end
